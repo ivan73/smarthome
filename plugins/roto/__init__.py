@@ -426,10 +426,10 @@ class RotoItem:
                         self.__item_up(x_delay['value'])
                     elif self.__direction == DOWN:
                         self.__item_down(x_delay['value'])
-                self.__time_off = self.__sh.now()
-                self.__direction = OFF
-                self.__delays.remove(x_delay)
-                logger.debug("roto_loop Fahrt-AUS Position: {0} ".format(self.__position))
+                    self.__time_off = self.__sh.now()
+                    self.__direction = OFF
+                    self.__delays.remove(x_delay)
+                    logger.debug("roto_loop Fahrt-AUS Position: {0} ".format(self.__position))
                 elif self.__actor_type == 'jalousie':
                     if x_delay['direction'] == DOWN:
                         self.__item_down(x_delay['value'])
