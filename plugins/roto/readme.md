@@ -19,7 +19,7 @@ Zwei Schaltaktor-Kanäle für ein Roto Dachfenster  (Auf bzw. Ab).
 
 ## plugin.conf
 
-Please provide a plugin.conf snippet for your plugin with ever option your plugin supports. Optional attributes should be commented out.
+Folgende Zeilen sind in die Datei plugin.conf einzutragen:
 
 <pre>
 [roto]
