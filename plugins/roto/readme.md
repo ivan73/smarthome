@@ -170,7 +170,7 @@ items.conf
                 roto_cycle_time = 5 # [Sekunden] Aktualisierungsintervall des Positionsitems
 </pre>
 
-Bei Jalousieaktoren werden die Iems "Aktor_Zu" und "Aktor_Auf" auskommentiert werden, und dafür die beiden Items "Aktor_Auf_ab" und "Aktor_stop" aktiviert werden.
+Bei Jalousieaktoren werden die Items "Aktor_Zu" und "Aktor_Auf" auskommentiert werden, und dafür die beiden Items "Aktor_Auf_ab" und "Aktor_stop" aktiviert werden.
 
 <pre>
 # items/example.conf
@@ -178,8 +178,8 @@ Bei Jalousieaktoren werden die Iems "Aktor_Zu" und "Aktor_Auf" auskommentiert we
 			#[[[[Aktor_Zu]]]]  # Schaltaktor für ZuFahren - für Roto Dachfenster!!
 			#	type = bool
 			#	knx_dpt = 1
-			#	knx_send = 4/2/114
-               #enforce_updates = True
+	 		#	knx_send = 4/2/114
+			#	enforce_updates = True
 			#[[[[Aktor_Auf]]]]  # Schaltaktor für Auffahren - für Roto Dachfenster!!
 			#	type = bool
 			#	enforce_updates = True
