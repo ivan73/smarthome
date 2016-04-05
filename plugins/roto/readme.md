@@ -104,6 +104,8 @@ items.conf
 *roto_cycle_time (in Sekunden)(optional, default 5 Sekunden)
     Zeit innerhalb welchem Zeitabstand das Positionsitem während der Fahrt aktualisert wird
 
+# Beispiel
+
 <pre>
 # items/example.conf
 [Dg]    
@@ -167,3 +169,47 @@ items.conf
 				roto_time_step = 6 # [Sekunden] Zeit beim Schrittweise fahren
                 roto_cycle_time = 5 # [Sekunden] Aktualisierungsintervall des Positionsitems
 </pre>
+
+Bei Jalousieaktoren werden die Iems "Aktor_Zu" und "Aktor_Auf" auskommentiert werden, und dafür die beiden Items "Aktor_Auf_ab" und "Aktor_stop" aktiviert werden.
+
+<pre>
+# items/example.conf
+
+			#[[[[Aktor_Zu]]]]  # Schaltaktor für ZuFahren - für Roto Dachfenster!!
+			#	type = bool
+			#	knx_dpt = 1
+			#	knx_send = 4/2/114
+               #enforce_updates = True
+			#[[[[Aktor_Auf]]]]  # Schaltaktor für Auffahren - für Roto Dachfenster!!
+			#	type = bool
+			#	enforce_updates = True
+			#	knx_dpt = 1
+			#	knx_send = 4/2/115
+            [[[[Aktor_Auf_ab]]]] # Gruppenadresse des Jalousieaktors
+				type = bool
+				enforce_updates = True
+				knx_dpt = 1
+				knx_send = 4/2/114
+			[[[[Aktor_stop]]]] # Gruppenadresse des Jalousieaktors
+				type = bool
+				enforce_updates = True
+				knx_dpt = 1
+				knx_send = 4/2/115
+			[[[[Roto]]]]    # Objekt Item / wird für das Plugin benötigt!!
+				roto_plugin = active # Kennzeichen für das Plugin
+				type = bool # muss bool sein
+				eval_trigger = Dg.Flur.Dachfenster.Auf_ab | Dg.Flur.Dachfenster.Lamellenverstellung_stop | Dg.Flur.Dachfenster.Position # Triggern des Items wenn Taster gedrückt wird
+				eval = not sh.Dg.Flur.Dachfenster.Roto # wird für das Plugin benötigt
+				roto_up_down = Dg.Flur.Dachfenster.Auf_ab # Taster 0 ab ; 1 auf
+				roto_stop = Dg.Flur.Dachfenster.Lamellenverstellung_stop # Stop oder 0 Schritt ab ; 1 Schritt auf
+				roto_position = Dg.Flur.Dachfenster.Position # aktuelle Position oder Position anfahren 0-100
+				#roto_actor_up_down = Dg.Flur.Dachfenster.Aktor_Auf_ab # Item GA des Jalousiekators
+				#roto_actor_stop = Dg.Flur.Dachfenster.Aktor_stop # Item GA des Jalousiekators
+                roto_actor_open = Dg.Flur.Dachfenster.Aktor_Auf  # Item Schaltaktor für Roto Dachfenster!!
+				roto_actor_close = Dg.Flur.Dachfenster.Aktor_Zu # Item Schaltaktor für Roto Dachfenster!!
+				roto_time_up = 60 # [Sekunden] max. Fahrzeit beim Auffahren
+				roto_time_down = 58 # [Sekunden] max. Fahrzeit beim Ab(Zu)fahren
+				roto_time_step = 6 # [Sekunden] Zeit beim Schrittweise fahren
+                roto_cycle_time = 5 # [Sekunden] Aktualisierungsintervall des Positionsitems
+</pre>
+
