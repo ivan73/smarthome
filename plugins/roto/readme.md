@@ -10,7 +10,7 @@ Wird das Dachfenster / die Jalousie ganz Auf- oder Zugefahren wird die Position 
 
 # Requirements / Benötigt werden:
 
-Zwei Items für den Jalousie-Taster bzw. Buttons in der Visualisierung für Auf_Ab und Stop_Schrittweise 
+Zwei Items für den Jalousie-Taster bzw. Buttons in der Visualisierung für Auf_Ab und Stop_Schrittweise. 
 Zwei Schaltaktor-Kanäle für ein Roto Dachfenster  (Auf bzw. Ab).
 
 (Alternativ kann auch ein Rolladen mit Jalousieaktor (welcher keine Positionsermittlung hat) angesteuert werden.)
@@ -28,8 +28,6 @@ Folgende Zeilen sind in die Datei plugin.conf einzutragen:
 
 </pre>
 
-
-
 items.conf
 --------------
 
@@ -39,14 +37,14 @@ items.conf
 
 *type (obligatorisch):
     Datentp des Objekt-Items
-    Für das Objekt-Item muss immer der Datentyp "bool" verwendet werden
+    Für das Objekt-Item muss immer der Datentyp "bool" verwendet werden.
 
 *eval_trigger (obligatorisch)
     Das Objektitems muss getriggert werden wenn eine Taste (oder Button) gedrückt wird, 
-    bzw. wenn eine Position angefahren werden soll
+    bzw. wenn eine Position angefahren werden soll.
     
 *eval (obligatorisch)
-    Bei jedem Triggern soll sich der Zustand des Objektitems ändern
+    Bei jedem Triggern soll sich der Zustand des Objektitems ändern.
     eval = not sh.Dg.Flur.Dachfenster.Roto
     
 *roto_up_down (obligatorisch)
@@ -55,7 +53,7 @@ items.conf
     Bei einem 1-Signal fährt der Aktor Ab/Zu.
 
 *roto_stop (obligatorisch)
-    Das Taster-Item, dass überwacht werden soll, muss auf Ebene des Objekt-Items über das Attribut "roto_up_down" angegeben werden.
+    Das Taster-Item, dass überwacht werden soll, muss auf Ebene des Objekt-Items über das Attribut "roto_stop" angegeben werden.
     Wird das Item während der Fahrt geändert:
         Mit einem 0 oder 1 Signal wird die Fahrt gestoppt.
     
