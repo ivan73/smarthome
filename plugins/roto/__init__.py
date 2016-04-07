@@ -20,7 +20,6 @@
 #########################################################################
 
 import logging
-#import pydevd
 import time
 
 #from . import RotoItem
@@ -32,11 +31,6 @@ IMPULS = 1
 UP = 0
 DOWN = 1
 OFF = 2
-# pydevd.settrace(IP) - Breakpoint Debugger
-#IP = "10.67.67.180" #R014 
-#IP = "10.67.70.184" #R113
-#IP = "10.67.70.184" 
-#IP = "192.168.0.81" 
 
 
 
@@ -53,7 +47,6 @@ class Roto():
         for item in self._sh.find_items("roto_plugin"):
             if item.conf["roto_plugin"] == "active":
                 try:
-                    #pydevd.settrace(IP) # Breakpoint Debugger
                     roto_item = RotoItem(self._sh, item)
                     self.__roto_items[roto_item.id] = roto_item
                     count_items += 1
@@ -99,21 +92,18 @@ class Roto():
                 roto_item.roto_step_down()
 
         if (source == item.conf['roto_up_down']):
-            #pydevd.settrace(IP) # Breakpoint Debugger
             if (item_source() == UP):
                 roto_item.roto_up_total()
             else:
                 roto_item.roto_down_total()
                 
         if (source == item.conf['roto_position']):
-            #pydevd.settrace(IP) # Breakpoint Debugger
             value = 0
             if caller != 'Eval':
                 value = item()
             else:
                 value = orig_item()
             logger.debug("roto set position: {0}".format(value))
-            #logger.info("roto set position orig_caller: {0}".format(orig_caller))
             roto_item.roto_position(value)
 			
 	
@@ -204,7 +194,6 @@ class RotoItem:
     # smarthome: instance of smarthome.py
     # item: item to use
     def __init__(self, smarthome, item):
-        #pydevd.settrace(IP) # Breakpoint Debugger
         self.__sh = smarthome
         self.__item = item
         self.__id = self.__item.id()
@@ -252,7 +241,6 @@ class RotoItem:
         self.__direction = OFF
         
     def roto_position(self, value):
-        #pydevd.settrace(IP) # Breakpoint Debugger
         if self.__direction != OFF:
             self.roto_stop()
             time.sleep(IMPULS+1)
@@ -293,10 +281,8 @@ class RotoItem:
                 self.__direction = UP
                 self.__time_on = self.__sh.now()
                 self.__time_last_loop = self.__sh.now()
-                #self.roto_add_delay(DOWN, 0, IMPULS)
                 self.roto_add_delay(DOWN, 1, value)
-                #self.roto_add_delay(DOWN, 0, value + IMPULS)
-        
+
     def roto_down(self, value):
         if self.__direction != OFF:
             self.roto_stop()
@@ -315,10 +301,8 @@ class RotoItem:
                 self.__direction = DOWN
                 self.__time_on = self.__sh.now()
                 self.__time_last_loop = self.__sh.now()
-                #self.roto_add_delay(DOWN, 0, IMPULS)
                 self.roto_add_delay(DOWN, 1, value)
-                #self.roto_add_delay(DOWN, 0, value + IMPULS)
-        
+
     def roto_up_total(self):
         self.roto_up(self.__time_up)
         
@@ -337,8 +321,6 @@ class RotoItem:
                 self.__item_down(0)
                 self.__item_up(1)
                 logger.debug("roto_stop Fahrt-AUS Position: {0}".format(self.__position))
-                #self.__direction = UP
-                #self.__time_on = self.__sh.now()
                 self.__delays = []
                 self.roto_add_delay(UP, 0, IMPULS)
                 
@@ -346,8 +328,6 @@ class RotoItem:
                 self.__item_up(0)
                 self.__item_down(1)
                 logger.debug("roto_stop Fahrt-AUS Position: {0}".format(self.__position))
-                #self.__direction = DOWN
-                #self.__time_on = self.__sh.now()
                 self.__delays = []
                 self.roto_add_delay(DOWN, 0, IMPULS)
         elif self.__actor_type == 'jalousie':
@@ -359,9 +339,7 @@ class RotoItem:
             
         
     def roto_add_delay(self, direction, value, delay):
-        #pydevd.settrace(IP) # Breakpoint Debugger
-        
-        #if not item in self.__delays:
+
         x_delay = {}
         x_delay.update({'delay': delay})
         x_delay.update({'direction': direction})
@@ -371,23 +349,17 @@ class RotoItem:
         
         if self.__id not in self.__sh.scheduler:
             s = self.__sh.scheduler.add(self.__id, self.roto_loop, prio=5, offset = 2, cycle=int(self.__cycle_time))
-        #else:
-        #    self.__sh.scheduler.change(self.__id, active=True)
-            
+
     # wird ueber scheduler aufgerufen
     def roto_loop(self):
         # Wenn keine Eintraege vorhanden sind, kann scheduler deaktiviert werden
-        #pydevd.settrace(IP) # Breakpoint Debugger
         if (len(self.__delays)) == 0:
-            #pydevd.settrace(IP) # Breakpoint Debugger
             if self.__id in self.__sh.scheduler:
                 logger.debug("roto_loop STOP scheduler")
                 self.__sh.scheduler.remove(self.__id)
                 self.__direction = OFF
-                #self.__sh.scheduler.change(self.__id, active=False)
             else:
                 logger.debug("roto_loop keine Eintraege in delays vorhanden")
-                #self.__sh.scheduler.change(self.__id, active=False)
         else:
             time_on_sec = (self.__sh.now() - self.__time_on).total_seconds()
             # delays-Liste sortieren
@@ -400,7 +372,6 @@ class RotoItem:
             else:
                 logger.debug("roto_loop keine Eintraege in x_delays vorhanden")
                 return
-            
             
             # Berechnen der Position Ueber die Fahrzeit
             self.roto_calc_pos()
@@ -437,13 +408,8 @@ class RotoItem:
                         self.__direction = OFF
                         self.__delays.remove(x_delay)
                         logger.debug("roto_loop Fahrt-AUS Position: {0} ".format(self.__position))
-                
-            
-            #logger.info("roto_loop")
-        
-        
+
     def roto_calc_pos(self):
-        #pydevd.settrace(IP) # Breakpoint Debugger
         time_loop_sec = (self.__sh.now() - self.__time_last_loop).total_seconds()
         if self.__time_on > self.__time_off:
             if self.__direction == DOWN:
@@ -461,9 +427,7 @@ class RotoItem:
             return self.__position
         else:
             logger.error("roto aktuelle Position konnte nicht berechnet werden: {0} {1} ".format(self.__time_on, self.__time_off))
-        
-        
-    
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
