@@ -89,7 +89,7 @@ items.conf
 *roto_time_step (seconds)(optional, default 10 seconds)
     the step time
     
-*roto_cycle_time (secondsn)(optional, default 5 seconds)
+*roto_cycle_time (seconds)(optional, default 5 seconds)
     time interval the Position - item updated while running
 
 # Example
@@ -158,7 +158,7 @@ items.conf
                 roto_cycle_time = 5 # [Sekunden] Aktualisierungsintervall des Positionsitems
 </pre>
 
-Bei Jalousieaktoren werden die Items "Aktor_Zu" und "Aktor_Auf" auskommentiert werden, und dafür die beiden Items "Aktor_Auf_ab" und "Aktor_stop" aktiviert werden.
+To use the plugin whith shutter actuators the Items "Aktor_Zu" and "Aktor_Auf" are disabled, and the two items "Aktor_Auf_ab" and "Aktor_stop" are activated.
 
 <pre>
 # items/example.conf
