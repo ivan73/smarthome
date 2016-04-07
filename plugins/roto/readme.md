@@ -12,10 +12,10 @@ If the skylight / the blind completely opened or closed, the position corrected 
 
 # Requirements 
 
-Two items for the blind push-button or buttons in the visualization for up_down and Stop_Step.
+Two items for the shutter push-button or buttons in the visualization for up_down and Stop_Step.
 Two actuators channels on a Roto roof windows (up and down).
 
-(Alternatively, a blind actuator (which no position determination has))
+(Alternatively, a shutter actuator (which no position determination has))
 
 # Configuration
 
@@ -73,11 +73,11 @@ items.conf
 *roto_actor_close (mandatory)
     Actuator Item to close the roto skylight
     
-### alternative whit blind actuators:
+### alternative whit shutter actuators:
 *roto_actor_up_down
-    Actuator Item to open the blind
+    Actuator Item to open the shutter
 *roto_actor_stop 
-    Actuator Item to close the blind
+    Actuator Item to close the shutter
     
 *roto_time_up (seconds)(optional, default 60 seconds)
     mx. Runtime when opening (necessary for the calculation of the position)
