@@ -22,8 +22,6 @@
 import logging
 import time
 
-#from . import RotoItem
-
 logger = logging.getLogger('')
 
 IDENTICICATION = 'Roto'
