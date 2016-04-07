@@ -1,4 +1,4 @@
-# Roto
+# roto_plugin
 
 Deutsche Anleitung: https://github.com/ivan73/smarthome/wiki/roto_plugin.Doku.de
 
@@ -67,18 +67,17 @@ items.conf
     About this item, the calculated position is updated.
     If this item is set to a value, this position is approached.
     
-### bei Roto Dachfenster mit Schaltaktoren:
-*roto_actor_open (obligatorisch/alternativ)
+### Roto skylight:
+*roto_actor_open (mandatory)
     Actuator Item to open the roto skylight
-*roto_actor_close (obligatorisch/alternativ))
+*roto_actor_close (mandatory)
     Actuator Item to close the roto skylight
     
-### Alternativ bei Jalosieaktoren:
-*roto_actor_up_down (obligatorisch/alternativ))
-    Actuator Item to open the blade
-
-*roto_actor_stop (obligatorisch/alternativ))
-    Actuator Item to close the blade
+### alternative whit blind actuators:
+*roto_actor_up_down
+    Actuator Item to open the blind
+*roto_actor_stop 
+    Actuator Item to close the blind
     
 *roto_time_up (seconds)(optional, default 60 seconds)
     mx. Runtime when opening (necessary for the calculation of the position)
