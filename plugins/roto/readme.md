@@ -1,6 +1,6 @@
 # Roto
 
-Deutsche Anleitung: https://github.com/ivan73/smarthome/wiki/Roto.Doku.de
+Deutsche Anleitung: https://github.com/ivan73/smarthome/wiki/roto_plugin.Doku.de
 
 The plugin calculates the current position of the skylight (alternatively, the blinds / shutters) over the uptime.
 The position is continuously updated by the plugin position Item. For this, the plugin will trigger itself (by scheduler)
